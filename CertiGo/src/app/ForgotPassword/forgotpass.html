@@ -1,0 +1,24 @@
+<div class="login-page">
+  <div class="forgot-wrap">
+    <div class="key">🔑</div>
+    <h1 class="brand">Forgot Password</h1>
+    <p class="subtitle">Enter your email to receive verification code</p>
+
+    <div class="login-card">
+      <form (submit)="sendCode($event)">
+        <label for="email">Email</label>
+        <div class="field">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="M22 6l-10 7L2 6"></path>
+          </svg>
+          <input id="email" type="email" placeholder="" />
+        </div>
+
+        <button type="submit" class="submit">SEND RESET CODE</button>
+      </form>
+    </div>
+
+    <p class="footer">Remembered it? <a routerLink="/login">Back to Login</a></p>
+  </div>
+</div>
