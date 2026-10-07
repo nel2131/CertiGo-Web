@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,13 @@ import { RouterLink } from '@angular/router';
 })
 export class Login {
   showPassword = false;
+
+  constructor(private router: Router) {}
+
+  goToDashboard(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['/dashboard']);
+  }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
