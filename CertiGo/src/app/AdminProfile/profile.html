@@ -1,0 +1,112 @@
+<div class="dash" [class.blurred]="showChangePassword">
+  <aside class="sidebar">
+    <div class="brand-row">
+      <h2>CertiGo.</h2>
+      <span class="badge">Admin</span>
+    </div>
+    <nav>
+      <a routerLink="/dashboard">▦ Dashboard</a>
+      <a routerLink="/requests">▣ Requests</a>
+      <a routerLink="/residents">♟ Residents</a>
+      <a routerLink="/broadcast">▥ Broadcast Studio</a>
+      <a class="active" routerLink="/profile">👤 Admin Profile</a>
+    </nav>
+    <a class="logout" routerLink="/login">⏻ Log Out</a>
+  </aside>
+
+  <main class="content">
+    <header class="topbar center">
+      <h1>Admin Account Profile</h1>
+      <p>Manage your official administrator account details and contact information.</p>
+    </header>
+
+    <div class="card profile-card">
+      <div class="banner"><span class="cam">📷</span></div>
+      <div class="avatar-ring">👤</div>
+      <h2>Username</h2>
+
+      <div class="grid">
+        <div class="field">
+          <label>Username</label>
+          <div class="input"><span>👤</span><input type="text" placeholder="Enter your username" /></div>
+        </div>
+        <div class="field">
+          <label>Official Mobile Number</label>
+          <div class="input"><span>📞</span><input type="text" placeholder="Enter mobile number" /></div>
+        </div>
+        <div class="field">
+          <label>Official Email Address</label>
+          <div class="input">
+            <span>✉</span>
+            <input type="email" placeholder="you@example.com" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Barangay Designation / Title</label>
+          <div class="input"><span>🏛</span><input type="text" placeholder="Enter designation / title" /></div>
+        </div>
+        <div class="field full">
+          <label>Assigned Zone Jurisdiction</label>
+          <div class="input"><span>⌖</span><input type="text" placeholder="Enter zone jurisdiction" /></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <span class="last">🟢 Last active: Today at 08:30 AM from 192.168.1.1</span>
+        <button class="ghost" (click)="openChangePassword()">Change Password</button>
+        <button class="solid">SAVE PROFILE CHANGES</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+@if (showChangePassword) {
+  <div class="overlay" (click)="closeChangePassword()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-head">
+        <span class="key-ico">🔑</span>
+        <small>SECURITY SETTINGS</small>
+        <button class="close" (click)="closeChangePassword()">✕</button>
+      </div>
+      <h3>Change Password</h3>
+      <p class="modal-sub">Update your administrator credentials to maintain account security.</p>
+
+      <label>CURRENT PASSWORD <span class="forgot">Forgot?</span></label>
+      <div class="input">
+        <span>🔒</span>
+        <input [type]="showCurrent ? 'text' : 'password'" placeholder="Enter current password" />
+        <button class="eye" (click)="showCurrent = !showCurrent">👁</button>
+      </div>
+
+      <label>NEW PASSWORD</label>
+      <div class="input">
+        <span>🔒</span>
+        <input [type]="showNew ? 'text' : 'password'" placeholder="Enter new password" />
+        <button class="eye" (click)="showNew = !showNew">👁</button>
+      </div>
+
+      <label>CONFIRM NEW PASSWORD</label>
+      <div class="input">
+        <span>🔒</span>
+        <input [type]="showConfirm ? 'text' : 'password'" placeholder="Confirm new password" />
+        <span class="ok">✔</span>
+      </div>
+      <p class="match">🟢 Passwords match</p>
+
+      <div class="reqs">
+        <p>Password must contain: <span>4/4 met</span></p>
+        <div class="req-grid">
+          <span>✔ At least 8 characters</span>
+          <span>✔ 1 uppercase letter</span>
+          <span>✔ 1 number</span>
+          <span>✔ 1 special char (!@#$)</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="ghost" (click)="closeChangePassword()">Cancel</button>
+        <button class="solid">🔑 UPDATE PASSWORD</button>
+      </div>
+    </div>
+  </div>
+}

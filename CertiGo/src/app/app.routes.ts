@@ -5,6 +5,10 @@ import { ForgotPass } from './ForgotPassword/forgotpass';
 import { ResetPass } from './ResetPassword/resetpass';
 import { Dashboard } from './Dashboard/dashboard';
 import { Request } from './Requests/request';
+import { Residents } from './Residents/residents';
+
+import { Broadcast } from './BroadcastStudio/broadcast';
+import { Profile } from './AdminProfile/profile';
 
 export const routes: Routes = [
   { path: '', component: Login },
@@ -14,4 +18,7 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPass },
   { path: 'dashboard', component: Dashboard },
   { path: 'requests', component: Request },
+  { path: 'residents', component: Residents },
+  { path: 'broadcast', component: Broadcast },
+  { path: 'profile', component: Profile },
 ];

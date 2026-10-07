@@ -1,0 +1,70 @@
+<div class="dash">
+  <aside class="sidebar">
+    <div class="brand-row">
+      <h2>CertiGo.</h2>
+      <span class="badge">Admin</span>
+    </div>
+    <nav>
+      <a routerLink="/dashboard">▦ Dashboard</a>
+      <a routerLink="/requests">▣ Requests</a>
+      <a class="active" routerLink="/residents">♟ Residents</a>
+      <a routerLink="/broadcast">▥ Broadcast Studio</a>
+      <a routerLink="/profile">👤 Admin Profile</a>
+    </nav>
+    <a class="logout" routerLink="/login">⏻ Log Out</a>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div>
+        <h1>Resident Directory</h1>
+        <p>Manage and verify resident information across all zones.</p>
+      </div>
+      <div class="controls">
+        <span class="avatar">OC</span>
+        <span class="officer">Officer Cruz</span>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <input type="text" placeholder="🔍 Search by resident name or ID..." class="search" />
+
+      <div class="status-dropdown" [class.open]="zoneOpen">
+        <button type="button" class="status-btn" (click)="toggleZone()">
+          {{ selectedZone }} <span class="chev">▾</span>
+        </button>
+        <ul class="status-list">
+          @for (z of zoneOptions; track z) {
+            <li (click)="selectZone(z)" [class.active]="z === selectedZone">{{ z }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="status-dropdown" [class.open]="exportOpen">
+        <button type="button" class="export-btn" (click)="toggleExport()">
+          ⬇ Export Resident List <span class="chev">▾</span>
+        </button>
+        <ul class="status-list">
+          @for (e of exportOptions; track e) {
+            <li (click)="selectExport(e)">{{ e }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <section class="card table-card">
+      <table>
+        <thead>
+          <tr><th>Resident</th><th>Address / Zone</th><th>Mobile Number</th><th>Email Address</th><th>App Status</th><th>Total Requests</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="7" class="empty">No residents yet</td></tr>
+        </tbody>
+      </table>
+      <div class="pager">
+        <span>Showing 0 of 0 residents</span>
+        <span>‹ Previous <b>1</b> Next ›</span>
+      </div>
+    </section>
+  </main>
+</div>
