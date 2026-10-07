@@ -1,0 +1,136 @@
+<div class="dash">
+  <aside class="sidebar">
+    <div class="brand-row">
+      <h2>CertiGo.</h2>
+      <span class="badge">Admin</span>
+    </div>
+    <nav>
+      <a class="active" routerLink="/dashboard">▦ Dashboard</a>
+      <a routerLink="/requests">▣ Requests</a>
+      <a href="#">♟ Residents</a>
+      <a href="#">▥ Broadcast Studio</a>
+      <a href="#">👤 Admin Profile</a>
+    </nav>
+    <a class="logout" routerLink="/login">⏻ Log Out</a>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div>
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back, Officer Cruz here's what's happening today.</p>
+      </div>
+      <div class="controls">
+        <span class="pill">📅 Oct 1, 2026 – Oct 30, 2026</span>
+        <span class="pill">All Zones ▾</span>
+        <span class="avatar">OC</span>
+        <span class="officer">Officer Cruz</span>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">⏳</span>
+          <small>PENDING<br />REQUESTS</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">💳</span>
+          <small>APPROVED<br />TODAY</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">👥</span>
+          <small>REGISTERED<br />RESIDENTS</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">⏱</span>
+          <small>AVG PROCESSING<br />TIME</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="card line-card">
+        <div class="card-head">
+          <div>
+            <h3>Monthly Request Volume &amp; Trends</h3>
+            <small>Real-time barangay clearance and clearance filing trends</small>
+          </div>
+          <span class="pill">Last 30 Days ▾</span>
+        </div>
+        <div class="chart-box"><canvas #lineChart></canvas></div>
+      </div>
+
+      <div class="card doughnut-card">
+        <div class="card-head">
+          <h3>Distribution by Type</h3>
+          <span class="pill">10-Day View</span>
+        </div>
+        <div class="type-bars">
+          <div><span>Barangay Clearance</span><div class="bar"><i style="width:0%"></i></div><b>0%</b></div>
+          <div><span>Certificate of Indigency</span><div class="bar"><i style="width:0%"></i></div><b>0%</b></div>
+          <div><span>Certificate of Residency</span><div class="bar"><i style="width:0%"></i></div><b>0%</b></div>
+        </div>
+        <div class="chart-box small"><canvas #doughnutChart></canvas></div>
+      </div>
+    </section>
+
+    <section class="card table-card">
+      <div class="card-head">
+        <h3>Recent Document Requests</h3>
+        <div class="tools">
+          <input type="text" placeholder="🔍 Search by RRF or Name" />
+          <div class="status-dropdown" [class.open]="statusOpen">
+            <button type="button" class="status-btn" (click)="toggleStatus()">
+              {{ selectedStatus }} <span class="chev">▾</span>
+            </button>
+            <ul class="status-list">
+              @for (s of statusOptions; track s) {
+                <li (click)="selectStatus(s)" [class.active]="s === selectedStatus">{{ s }}</li>
+              }
+            </ul>
+          </div>
+          <span class="pill tab">Export CSV</span>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Ref ID</th><th>Resident Name</th><th>Document Type</th><th>Zone - Purok</th><th>Date Filed</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="7" style="text-align:center;color:rgba(214,235,226,0.4);padding:20px;">No records yet</td></tr>
+        </tbody>
+      </table>
+      <div class="pager">
+        <span>Showing 0 of 0 entries</span>
+        <span>Previous <b>1</b> Next</span>
+      </div>
+    </section>
+  </main>
+</div>
