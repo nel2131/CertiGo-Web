@@ -5,8 +5,8 @@
       <span class="badge">Admin</span>
     </div>
     <nav>
-      <a class="active" href="#">▦ Dashboard</a>
-      <a href="#">▣ Requests</a>
+      <a class="active" routerLink="/dashboard">▦ Dashboard</a>
+      <a routerLink="/requests">▣ Requests</a>
       <a href="#">♟ Residents</a>
       <a href="#">▥ Broadcast Studio</a>
       <a href="#">👤 Admin Profile</a>
@@ -29,11 +29,50 @@
     </header>
 
     <section class="stats">
-      <div class="stat"><span class="ico">🕘</span><small>PENDING REQUESTS</small><strong>0</strong><em></em></div>
-      <div class="stat"><span class="ico">⌛</span><small>URGENT</small><strong>0</strong><em></em></div>
-      <div class="stat"><span class="ico">✅</span><small>APPROVED TODAY</small><strong>0</strong><em></em></div>
-      <div class="stat"><span class="ico">▣</span><small>ON TRACK</small><strong>0</strong><em></em></div>
-      <div class="stat"><span class="ico">ZONE I B</span><small>AVG PROCESSING</small><strong>0</strong><em></em></div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">⏳</span>
+          <small>PENDING<br />REQUESTS</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">💳</span>
+          <small>APPROVED<br />TODAY</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">👥</span>
+          <small>REGISTERED<br />RESIDENTS</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-top">
+          <span class="ico">⏱</span>
+          <small>AVG PROCESSING<br />TIME</small>
+          <span class="tag">-</span>
+        </div>
+        <div class="stat-bottom">
+          <strong>0</strong>
+          <em>-</em>
+        </div>
+      </div>
     </section>
 
     <section class="charts">
@@ -67,7 +106,16 @@
         <h3>Recent Document Requests</h3>
         <div class="tools">
           <input type="text" placeholder="🔍 Search by RRF or Name" />
-          <span class="pill">All Types ▾</span>
+          <div class="status-dropdown" [class.open]="statusOpen">
+            <button type="button" class="status-btn" (click)="toggleStatus()">
+              {{ selectedStatus }} <span class="chev">▾</span>
+            </button>
+            <ul class="status-list">
+              @for (s of statusOptions; track s) {
+                <li (click)="selectStatus(s)" [class.active]="s === selectedStatus">{{ s }}</li>
+              }
+            </ul>
+          </div>
           <span class="pill tab">Export CSV</span>
         </div>
       </div>

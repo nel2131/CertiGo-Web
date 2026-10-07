@@ -12,6 +12,19 @@ export class Dashboard implements AfterViewInit {
   @ViewChild('lineChart') lineChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('doughnutChart') doughnutChartRef!: ElementRef<HTMLCanvasElement>;
 
+  statusOptions = ['All', 'Approved', 'Pending Review', 'Processing'];
+  selectedStatus = 'All';
+  statusOpen = false;
+
+  toggleStatus() {
+    this.statusOpen = !this.statusOpen;
+  }
+
+  selectStatus(s: string) {
+    this.selectedStatus = s;
+    this.statusOpen = false;
+  }
+
   ngAfterViewInit() {
     new Chart(this.lineChartRef.nativeElement, {
       type: 'line',
@@ -20,7 +33,7 @@ export class Dashboard implements AfterViewInit {
         datasets: [
           {
             label: 'Monthly Requests',
-            data: [],
+            data: [0, 0, 0, 0, 0, 0, 0, 0],
             borderColor: '#34d399',
             backgroundColor: 'rgba(52, 211, 153, 0.15)',
             fill: true,
@@ -35,7 +48,7 @@ export class Dashboard implements AfterViewInit {
         plugins: { legend: { labels: { color: 'rgba(226,242,235,0.7)' } } },
         scales: {
           x: { ticks: { color: 'rgba(226,242,235,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          y: { ticks: { color: 'rgba(226,242,235,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { beginAtZero: true, ticks: { color: 'rgba(226,242,235,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
         },
       },
     });
@@ -43,11 +56,11 @@ export class Dashboard implements AfterViewInit {
     new Chart(this.doughnutChartRef.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: [],
+        labels: ['No data'],
         datasets: [
           {
-            data: [],
-            backgroundColor: ['#34d399', '#fbbf24', '#f472b6'],
+            data: [1],
+            backgroundColor: ['rgba(255, 255, 255, 0.08)'],
             borderWidth: 0,
           },
         ],
