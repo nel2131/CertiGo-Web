@@ -5,13 +5,13 @@
       <span class="badge">Admin</span>
     </div>
     <nav>
-      <a routerLink="/dashboard">▦ Dashboard</a>
-      <a routerLink="/requests">▣ Requests</a>
-      <a class="active" routerLink="/residents">♟ Residents</a>
-      <a routerLink="/broadcast">▥ Broadcast Studio</a>
-      <a routerLink="/profile">👤 Admin Profile</a>
+      <a routerLink="/dashboard"><i class="ti-ico ti-ico--home"></i> Dashboard</a>
+      <a routerLink="/requests"><i class="ti-ico ti-ico--file-description"></i> Requests</a>
+      <a class="active" routerLink="/residents"><i class="ti-ico ti-ico--users"></i> Residents</a>
+      <a routerLink="/broadcast"><i class="ti-ico ti-ico--speakerphone"></i> Broadcast Studio</a>
+      <a routerLink="/profile"><i class="ti-ico ti-ico--user"></i> Admin Profile</a>
     </nav>
-    <a class="logout" routerLink="/login">⏻ Log Out</a>
+    <a class="logout" routerLink="/login"><i class="ti-ico ti-ico--logout"></i> Log Out</a>
   </aside>
 
   <main class="content">
@@ -27,7 +27,10 @@
     </header>
 
     <div class="toolbar">
-      <input type="text" placeholder="🔍 Search by resident name or ID..." class="search" />
+      <label class="search-box">
+        <i class="ti-ico ti-ico--zoom"></i>
+        <input type="text" placeholder="Search by resident name or ID..." />
+      </label>
 
       <div class="status-dropdown" [class.open]="zoneOpen">
         <button type="button" class="status-btn" (click)="toggleZone()">

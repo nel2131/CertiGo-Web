@@ -91,7 +91,9 @@ nav {
     background: linear-gradient(120deg, rgba(52, 211, 153, 0.35), rgba(16, 185, 129, 0.15));
     position: relative;
 
-    .cam { position: absolute; top: 10px; right: 12px; cursor: pointer; }
+    .cam { position: absolute; top: 10px; right: 12px; cursor: pointer;
+      .ti-ico { font-size: 0.95rem; color: rgba(226, 242, 235, 0.85); }
+    }
   }
 
   .avatar-ring {
@@ -167,6 +169,19 @@ nav {
   &:hover { filter: brightness(1.08); }
 }
 
+.avatar-ring .ti-ico {
+  font-size: 1.8rem;
+  color: #34d399;
+}
+
+.input .field-ico {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  opacity: 0.65;
+  line-height: 1;
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -194,7 +209,9 @@ nav {
 
   .modal-head {
     display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-    .key-ico { width: 24px; height: 24px; border-radius: 7px; background: rgba(52, 211, 153, 0.12); display: inline-flex; align-items: center; justify-content: center; }
+    .key-ico { width: 24px; height: 24px; border-radius: 7px; background: rgba(52, 211, 153, 0.12); display: inline-flex; align-items: center; justify-content: center;
+      .ti-ico { font-size: 0.9rem; color: #34d399; }
+    }
     small { font-size: 0.55rem; letter-spacing: 0.14em; color: rgba(214, 235, 226, 0.55); }
     .close { margin-left: auto; background: rgba(255, 255, 255, 0.06); border: none; color: rgba(226, 242, 235, 0.6); width: 22px; height: 22px; border-radius: 50%; cursor: pointer; &:hover { color: #f87171; } }
   }

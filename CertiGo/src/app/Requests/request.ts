@@ -11,6 +11,10 @@ export class Request implements AfterViewInit {
   activeFilter = 0;
   @ViewChild('filterGroup') filterGroup!: ElementRef<HTMLDivElement>;
 
+  sortOptions = ['Newest', 'Oldest', 'Resident Name', 'Document Type', 'Status'];
+  selectedSort = 'Newest';
+  sortOpen = false;
+
   ngAfterViewInit() {
     this.moveSlider();
   }
@@ -18,6 +22,15 @@ export class Request implements AfterViewInit {
   setFilter(index: number) {
     this.activeFilter = index;
     setTimeout(() => this.moveSlider());
+  }
+
+  toggleSort() {
+    this.sortOpen = !this.sortOpen;
+  }
+
+  selectSort(s: string) {
+    this.selectedSort = s;
+    this.sortOpen = false;
   }
 
   private moveSlider() {

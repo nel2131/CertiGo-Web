@@ -154,7 +154,68 @@ nav {
     &.active { color: #34d399; font-weight: 600; }
   }
 
-  .sort { margin-left: auto; font-size: 0.62rem; color: rgba(214, 235, 226, 0.55); }
+  .status-dropdown {
+    position: relative;
+    margin-left: auto;
+
+    .status-btn {
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 5px 10px;
+      color: rgba(214, 235, 226, 0.65);
+      font-size: 0.62rem;
+      white-space: nowrap;
+
+      .chev { transition: transform 0.25s; display: inline-block; }
+    }
+
+    &.open .status-btn {
+      border-color: rgba(52, 211, 153, 0.5);
+      .chev { transform: rotate(180deg); }
+    }
+
+    .status-list {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      margin: 0;
+      padding: 4px;
+      list-style: none;
+      width: max-content;
+      min-width: 100%;
+      background: #062a23;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      transform: translateY(-6px);
+      max-height: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s, max-height 0.25s;
+
+      li {
+        padding: 7px 12px;
+        font-size: 0.64rem;
+        color: rgba(226, 242, 235, 0.75);
+        border-radius: 7px;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+        &.active { background: #34d399; color: #04302a; font-weight: 600; }
+      }
+    }
+
+    &.open .status-list {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 200px;
+      pointer-events: auto;
+    }
+  }
 }
 
 .card {

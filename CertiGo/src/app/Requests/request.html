@@ -5,13 +5,13 @@
       <span class="badge">Admin</span>
     </div>
     <nav>
-      <a routerLink="/dashboard">▦ Dashboard</a>
-      <a class="active" routerLink="/requests">▣ Requests</a>
-      <a routerLink="/residents">♟ Residents</a>
-      <a routerLink="/broadcast">▥ Broadcast Studio</a>
-      <a routerLink="/profile">👤 Admin Profile</a>
+      <a routerLink="/dashboard"><i class="ti-ico ti-ico--home"></i> Dashboard</a>
+      <a class="active" routerLink="/requests"><i class="ti-ico ti-ico--file-description"></i> Requests</a>
+      <a routerLink="/residents"><i class="ti-ico ti-ico--users"></i> Residents</a>
+      <a routerLink="/broadcast"><i class="ti-ico ti-ico--speakerphone"></i> Broadcast Studio</a>
+      <a routerLink="/profile"><i class="ti-ico ti-ico--user"></i> Admin Profile</a>
     </nav>
-    <a class="logout" routerLink="/login">⏻ Log Out</a>
+    <a class="logout" routerLink="/login"><i class="ti-ico ti-ico--logout"></i> Log Out</a>
   </aside>
 
   <main class="content">
@@ -37,7 +37,16 @@
             <button type="button" class="filter" [class.active]="activeFilter === 2" (click)="setFilter(2)">Under Review <small>(0)</small></button>
             <button type="button" class="filter" [class.active]="activeFilter === 3" (click)="setFilter(3)">Ready / Completed <small>(0)</small></button>
           </div>
-          <span class="sort">Sort by: Date Submitted ▾</span>
+          <div class="status-dropdown" [class.open]="sortOpen">
+            <button type="button" class="status-btn" (click)="toggleSort()">
+              Sort by: {{ selectedSort }} <span class="chev">▾</span>
+            </button>
+            <ul class="status-list">
+              @for (s of sortOptions; track s) {
+                <li (click)="selectSort(s)" [class.active]="s === selectedSort">{{ s }}</li>
+              }
+            </ul>
+          </div>
         </div>
 
         <div class="card table-card">

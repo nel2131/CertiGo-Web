@@ -104,6 +104,8 @@ nav {
     background: rgba(52, 211, 153, 0.12);
     display: inline-flex; align-items: center; justify-content: center;
     margin-right: 10px;
+
+    .ti-ico { font-size: 1.05rem; color: #34d399; }
   }
 
   .studio-id { display: flex; align-items: center; }
@@ -226,7 +228,12 @@ nav {
     }
 
     .sep { width: 1px; height: 14px; background: rgba(255, 255, 255, 0.12); margin: 0 4px; }
-    .encrypted { margin-left: auto; font-size: 0.58rem; color: #34d399; }
+    .encrypted {
+      margin-left: auto; font-size: 0.58rem; color: #34d399;
+      display: inline-flex; align-items: center; gap: 5px;
+
+      .ti-ico { font-size: 0.72rem; }
+    }
   }
 
   textarea {
@@ -265,6 +272,8 @@ nav {
       width: 26px; height: 26px; border-radius: 8px;
       background: rgba(52, 211, 153, 0.12);
       display: inline-flex; align-items: center; justify-content: center;
+
+      .ti-ico { font-size: 0.95rem; color: #34d399; }
     }
 
     b { display: block; font-size: 0.68rem; }
@@ -294,6 +303,12 @@ nav {
     cursor: pointer;
     box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
     transition: filter 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    .ti-ico { font-size: 0.95rem; }
 
     &:hover { filter: brightness(1.08); }
     &:active { transform: scale(0.98); }

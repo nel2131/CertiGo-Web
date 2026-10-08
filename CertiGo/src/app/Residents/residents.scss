@@ -94,18 +94,34 @@ nav {
   border-radius: 12px;
   padding: 12px 14px;
 
-  .search {
+  .search-box {
     flex: 1;
     max-width: 340px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
     padding: 8px 12px;
-    color: #e6f4ee;
-    font-size: 0.68rem;
-    outline: none;
+    transition: border-color 0.2s;
 
-    &:focus { border-color: rgba(52, 211, 153, 0.5); }
+    .ti-ico { font-size: 0.8rem; color: rgba(226, 242, 235, 0.5); }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0;
+      color: #e6f4ee;
+      font-size: 0.68rem;
+
+      &::placeholder { color: rgba(226, 242, 235, 0.4); }
+    }
+
+    &:focus-within { border-color: rgba(52, 211, 153, 0.5); }
   }
 
   .status-dropdown { margin-left: auto; }

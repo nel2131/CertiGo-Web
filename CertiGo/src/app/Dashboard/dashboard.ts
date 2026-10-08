@@ -1,4 +1,5 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import Chart from 'chart.js/auto';
 
@@ -12,9 +13,19 @@ export class Dashboard implements AfterViewInit {
   @ViewChild('lineChart') lineChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('doughnutChart') doughnutChartRef!: ElementRef<HTMLCanvasElement>;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+
   statusOptions = ['All', 'Approved', 'Pending Review', 'Processing'];
   selectedStatus = 'All';
   statusOpen = false;
+
+  rangeOptions = ['Last 7 Days', 'Last 14 Days', 'Last 21 Days', 'Last 30 Days'];
+  selectedRange = 'Last 30 Days';
+  rangeOpen = false;
+
+  zoneOptions = ['All Zones', 'Zone 1', 'Zone 2', 'Zone 3', 'Zone 5', 'Zone 8'];
+  selectedZone = 'All Zones';
+  zoneOpen = false;
 
   toggleStatus() {
     this.statusOpen = !this.statusOpen;
@@ -25,7 +36,33 @@ export class Dashboard implements AfterViewInit {
     this.statusOpen = false;
   }
 
+  toggleRange() {
+    this.rangeOpen = !this.rangeOpen;
+  }
+
+  selectRange(r: string) {
+    this.selectedRange = r;
+    this.rangeOpen = false;
+  }
+
+  toggleZone() {
+    this.zoneOpen = !this.zoneOpen;
+  }
+
+  selectZone(z: string) {
+    this.selectedZone = z;
+    this.zoneOpen = false;
+  }
+
+  exportCsv() {
+    // Placeholder: wire up CSV generation once the backend is connected.
+  }
+
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     new Chart(this.lineChartRef.nativeElement, {
       type: 'line',
       data: {
