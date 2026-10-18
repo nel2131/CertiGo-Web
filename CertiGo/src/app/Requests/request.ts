@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AdminSession } from '../core/admin-session';
 
 @Component({
   selector: 'app-request',
@@ -10,6 +11,13 @@ import { RouterLink } from '@angular/router';
 export class Request implements AfterViewInit {
   activeFilter = 0;
   @ViewChild('filterGroup') filterGroup!: ElementRef<HTMLDivElement>;
+
+  readonly session = inject(AdminSession);
+
+  /** First + last initial, or a single letter when only one name is set. */
+  get initials(): string {
+    return this.session.initials();
+  }
 
   sortOptions = ['Newest', 'Oldest', 'Resident Name', 'Document Type', 'Status'];
   selectedSort = 'Newest';

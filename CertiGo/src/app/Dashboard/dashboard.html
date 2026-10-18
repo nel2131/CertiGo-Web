@@ -21,7 +21,68 @@
         <p>Welcome back, Officer Cruz here's what's happening today.</p>
       </div>
       <div class="controls">
-        <span class="pill">📅 Oct 1, 2026 – Oct 30, 2026</span>
+        <div class="date-picker" [class.open]="calendarOpen">
+          <button type="button" class="status-btn" (click)="toggleCalendar()">
+            <i class="ti-ico ti-ico--calendar"></i> {{ dateRangeLabel }} <span class="chev">▾</span>
+          </button>
+
+          @if (calendarOpen) {
+            <div class="calendar">
+              <div class="cal-head">
+                <button type="button" class="cal-nav" (click)="shiftPeriod(-1)" aria-label="Previous">‹</button>
+                <button type="button" class="cal-title" (click)="cycleView()">
+                  {{ headerLabel }} <span class="caret">{{ view === 'year' ? '▲' : '▾' }}</span>
+                </button>
+                <button type="button" class="cal-nav" (click)="shiftPeriod(1)" aria-label="Next">›</button>
+              </div>
+
+              @if (view === 'day') {
+                <div class="dow">
+                  @for (d of weekDays; track $index) {
+                    <span>{{ d }}</span>
+                  }
+                </div>
+                <div class="days">
+                  @for (c of calendarDays; track c.date.getTime()) {
+                    <button type="button" class="day" [class.dim]="!c.inMonth" [class.sel]="isSelected(c.date)"
+                      [class.range]="isInRange(c.date)" [class.today]="isToday(c.date)" (click)="selectDay(c.date)">
+                      {{ c.day }}
+                    </button>
+                  }
+                </div>
+              }
+
+              @if (view === 'month') {
+                <div class="months">
+                  @for (m of monthNames; track m; let i = $index) {
+                    <button type="button" class="month" [class.sel]="i === viewMonth"
+                      (click)="selectMonth(i)">{{ m }}</button>
+                  }
+                </div>
+              }
+
+              @if (view === 'year') {
+                <div class="years">
+                  @for (y of yearGrid; track y) {
+                    <button type="button" class="year" [class.sel]="y === viewYear" (click)="selectYear(y)">{{ y }}</button>
+                  }
+                </div>
+              }
+
+              <div class="cal-foot">
+                <div class="presets">
+                  <button type="button" (click)="applyPreset('today')">Today</button>
+                  <button type="button" (click)="applyPreset('week')">Last 7 days</button>
+                  <button type="button" (click)="applyPreset('month')">This month</button>
+                </div>
+                <div class="cal-actions">
+                  <button type="button" class="cal-cancel" (click)="calendarOpen = false">Cancel</button>
+                  <button type="button" class="cal-apply" [disabled]="!rangeComplete" (click)="applyRange()">Apply</button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
         <div class="status-dropdown zone-drop" [class.open]="zoneOpen">
           <button type="button" class="status-btn" (click)="toggleZone()">
             {{ selectedZone }} <span class="chev">▾</span>
@@ -32,8 +93,8 @@
             }
           </ul>
         </div>
-        <span class="avatar">OC</span>
-        <span class="officer">Officer Cruz</span>
+        <span class="avatar" title="Signed in administrator">{{ initials }}</span>
+        <span class="officer">Username</span>
       </div>
     </header>
 
@@ -145,7 +206,7 @@
           <tr><th>Ref ID</th><th>Resident Name</th><th>Document Type</th><th>Zone - Purok</th><th>Date Filed</th><th>Status</th><th>Actions</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="7" style="text-align:center;color:rgba(214,235,226,0.4);padding:20px;">No records yet</td></tr>
+          <tr><td colspan="7" style="text-align:center;color:rgba(31,36,48,0.4);padding:20px;">No records yet</td></tr>
         </tbody>
       </table>
       <div class="pager">

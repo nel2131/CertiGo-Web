@@ -22,7 +22,13 @@
 
     <div class="card profile-card">
       <div class="banner"><span class="cam" title="Change profile picture"><i class="ti-ico ti-ico--camera"></i></span></div>
-      <div class="avatar-ring"><i class="ti-ico ti-ico--user"></i></div>
+      <div class="avatar-ring">
+        @if (initials) {
+          <span class="initials">{{ initials }}</span>
+        } @else {
+          <i class="ti-ico ti-ico--user"></i>
+        }
+      </div>
       <h2>Username</h2>
 
       <div class="grid">
@@ -51,6 +57,18 @@
         </div>
       </div>
 
+      <div class="pref">
+        <span class="pref-ico"><i class="ti-ico" [class.ti-ico--moon]="!darkMode" [class.ti-ico--sun]="darkMode"></i></span>
+        <div class="pref-text">
+          <b>Dark Mode</b>
+          <small>{{ darkMode ? 'Dark theme is on' : 'Switch the portal to a darker theme' }}</small>
+        </div>
+        <button type="button" class="switch" [class.on]="darkMode" (click)="toggleDarkMode()"
+          role="switch" [attr.aria-checked]="darkMode" aria-label="Toggle dark mode">
+          <span class="knob"></span>
+        </button>
+      </div>
+
       <div class="actions">
         <span class="last">🟢 Last active: Today at 08:30 AM from 192.168.1.1</span>
         <button class="ghost" (click)="openChangePassword()">Change Password</button>
@@ -71,42 +89,58 @@
       <h3>Change Password</h3>
       <p class="modal-sub">Update your administrator credentials to maintain account security.</p>
 
-      <label>CURRENT PASSWORD <span class="forgot">Forgot?</span></label>
-      <div class="input">
-        <span class="field-ico"><i class="ti-ico ti-ico--lock"></i></span>
-        <input [type]="showCurrent ? 'text' : 'password'" placeholder="Enter current password" />
-        <button class="eye" (click)="showCurrent = !showCurrent">👁</button>
-      </div>
-
-      <label>NEW PASSWORD</label>
-      <div class="input">
-        <span class="field-ico"><i class="ti-ico ti-ico--lock"></i></span>
-        <input [type]="showNew ? 'text' : 'password'" placeholder="Enter new password" />
-        <button class="eye" (click)="showNew = !showNew">👁</button>
-      </div>
-
-      <label>CONFIRM NEW PASSWORD</label>
-      <div class="input">
-        <span class="field-ico"><i class="ti-ico ti-ico--lock"></i></span>
-        <input [type]="showConfirm ? 'text' : 'password'" placeholder="Confirm new password" />
-        <span class="ok">✔</span>
-      </div>
-      <p class="match">🟢 Passwords match</p>
-
-      <div class="reqs">
-        <p>Password must contain: <span>4/4 met</span></p>
-        <div class="req-grid">
-          <span>✔ At least 8 characters</span>
-          <span>✔ 1 uppercase letter</span>
-          <span>✔ 1 number</span>
-          <span>✔ 1 special char (!@#$)</span>
+      <form class="change-form" (ngSubmit)="updatePassword()">
+        <label>CURRENT PASSWORD <span class="forgot">Forgot?</span></label>
+        <div class="input" [class.invalid]="submitted && currentPassword.trim().length === 0">
+          <span class="field-ico"><i class="ti-ico ti-ico--lock"></i></span>
+          <input name="currentPassword" [(ngModel)]="currentPassword" [type]="showCurrent ? 'text' : 'password'"
+            placeholder="Enter current password" autocomplete="current-password" />
+          <button type="button" class="eye" (click)="showCurrent = !showCurrent">👁</button>
         </div>
-      </div>
 
-      <div class="modal-actions">
-        <button class="ghost" (click)="closeChangePassword()">Cancel</button>
-        <button class="solid">UPDATE PASSWORD</button>
-      </div>
+        <label>NEW PASSWORD</label>
+        <div class="input" [class.valid]="newPasswordValid" [class.invalid]="submitted && !newPasswordValid">
+          <span class="field-ico"><i class="ti-ico ti-ico--lock"></i></span>
+          <input name="newPassword" [(ngModel)]="newPassword" [type]="showNew ? 'text' : 'password'"
+            placeholder="Enter new password" autocomplete="new-password" />
+          <button type="button" class="eye" (click)="showNew = !showNew">👁</button>
+        </div>
+
+        <label>CONFIRM NEW PASSWORD</label>
+        <div class="input" [class.valid]="passwordsMatch" [class.invalid]="confirmPassword.length > 0 && !passwordsMatch">
+          <span class="field-ico"><i class="ti-ico ti-ico--lock"></i></span>
+          <input name="confirmPassword" [(ngModel)]="confirmPassword" [type]="showConfirm ? 'text' : 'password'"
+            placeholder="Confirm new password" autocomplete="new-password" />
+          @if (passwordsMatch) {
+            <span class="ok">✔</span>
+          }
+        </div>
+        @if (confirmPassword.length > 0) {
+          <p class="match" [class.bad]="!passwordsMatch">{{ passwordsMatch ? 'Passwords match' : 'Passwords do not match' }}</p>
+        }
+
+        <div class="reqs">
+          <p>Password must contain: <span>{{ metCount }}/{{ rules.length }} met</span></p>
+          <div class="req-grid">
+            @for (r of requirements; track r.key) {
+              <span [class.met]="r.met" [class.unmet]="!r.met">{{ r.met ? '✔' : '○' }} {{ r.label }}</span>
+            }
+          </div>
+        </div>
+
+        @if (errorMessage) {
+          <p class="error">{{ errorMessage }}</p>
+        }
+
+        <div class="modal-actions">
+          <button type="button" class="ghost" (click)="closeChangePassword()">Cancel</button>
+          <button type="submit" class="solid" [disabled]="saving">{{ saving ? 'UPDATING…' : 'UPDATE PASSWORD' }}</button>
+        </div>
+      </form>
     </div>
   </div>
+}
+
+@if (toast) {
+  <div class="toast">✔ {{ toast }}</div>
 }

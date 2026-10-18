@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AdminSession } from '../core/admin-session';
 
 @Component({
   selector: 'app-broadcast',
@@ -8,6 +9,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './broadcast.scss',
 })
 export class Broadcast implements AfterViewInit {
+  readonly session = inject(AdminSession);
+
+  /** First + last initial, or a single letter when only one name is set. */
+  get initials(): string {
+    return this.session.initials();
+  }
+
   urgencyOptions = ['Advisory', 'Notice', 'Urgent'];
   activeUrgency = 1;
 
