@@ -5,13 +5,13 @@
       <span class="badge">Admin</span>
     </div>
     <nav>
-      <a class="active" routerLink="/dashboard">▦ Dashboard</a>
-      <a routerLink="/requests">▣ Requests</a>
-      <a href="#">♟ Residents</a>
-      <a href="#">▥ Broadcast Studio</a>
-      <a href="#">👤 Admin Profile</a>
+      <a class="active" routerLink="/dashboard"><i class="ti-ico ti-ico--home"></i> Dashboard</a>
+      <a routerLink="/requests"><i class="ti-ico ti-ico--file-description"></i> Requests</a>
+      <a routerLink="/residents"><i class="ti-ico ti-ico--users"></i> Residents</a>
+      <a routerLink="/broadcast"><i class="ti-ico ti-ico--speakerphone"></i> Broadcast Studio</a>
+      <a routerLink="/profile"><i class="ti-ico ti-ico--user"></i> Admin Profile</a>
     </nav>
-    <a class="logout" routerLink="/login">⏻ Log Out</a>
+    <a class="logout" routerLink="/login"><i class="ti-ico ti-ico--logout"></i> Log Out</a>
   </aside>
 
   <main class="content">
@@ -21,17 +21,87 @@
         <p>Welcome back, Officer Cruz here's what's happening today.</p>
       </div>
       <div class="controls">
-        <span class="pill">📅 Oct 1, 2026 – Oct 30, 2026</span>
-        <span class="pill">All Zones ▾</span>
-        <span class="avatar">OC</span>
-        <span class="officer">Officer Cruz</span>
+        <div class="date-picker" [class.open]="calendarOpen">
+          <button type="button" class="status-btn" (click)="toggleCalendar()">
+            <i class="ti-ico ti-ico--calendar"></i> {{ dateRangeLabel }} <span class="chev">▾</span>
+          </button>
+
+          @if (calendarOpen) {
+            <div class="calendar">
+              <div class="cal-head">
+                <button type="button" class="cal-nav" (click)="shiftPeriod(-1)" aria-label="Previous">‹</button>
+                <button type="button" class="cal-title" (click)="cycleView()">
+                  {{ headerLabel }} <span class="caret">{{ view === 'year' ? '▲' : '▾' }}</span>
+                </button>
+                <button type="button" class="cal-nav" (click)="shiftPeriod(1)" aria-label="Next">›</button>
+              </div>
+
+              @if (view === 'day') {
+                <div class="dow">
+                  @for (d of weekDays; track $index) {
+                    <span>{{ d }}</span>
+                  }
+                </div>
+                <div class="days">
+                  @for (c of calendarDays; track c.date.getTime()) {
+                    <button type="button" class="day" [class.dim]="!c.inMonth" [class.sel]="isSelected(c.date)"
+                      [class.range]="isInRange(c.date)" [class.today]="isToday(c.date)" (click)="selectDay(c.date)">
+                      {{ c.day }}
+                    </button>
+                  }
+                </div>
+              }
+
+              @if (view === 'month') {
+                <div class="months">
+                  @for (m of monthNames; track m; let i = $index) {
+                    <button type="button" class="month" [class.sel]="i === viewMonth"
+                      (click)="selectMonth(i)">{{ m }}</button>
+                  }
+                </div>
+              }
+
+              @if (view === 'year') {
+                <div class="years">
+                  @for (y of yearGrid; track y) {
+                    <button type="button" class="year" [class.sel]="y === viewYear" (click)="selectYear(y)">{{ y }}</button>
+                  }
+                </div>
+              }
+
+              <div class="cal-foot">
+                <div class="presets">
+                  <button type="button" (click)="applyPreset('today')">Today</button>
+                  <button type="button" (click)="applyPreset('week')">Last 7 days</button>
+                  <button type="button" (click)="applyPreset('month')">This month</button>
+                </div>
+                <div class="cal-actions">
+                  <button type="button" class="cal-cancel" (click)="calendarOpen = false">Cancel</button>
+                  <button type="button" class="cal-apply" [disabled]="!rangeComplete" (click)="applyRange()">Apply</button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="status-dropdown zone-drop" [class.open]="zoneOpen">
+          <button type="button" class="status-btn" (click)="toggleZone()">
+            {{ selectedZone }} <span class="chev">▾</span>
+          </button>
+          <ul class="status-list">
+            @for (z of zoneOptions; track z) {
+              <li (click)="selectZone(z)" [class.active]="z === selectedZone">{{ z }}</li>
+            }
+          </ul>
+        </div>
+        <span class="avatar" title="Signed in administrator">{{ initials }}</span>
+        <span class="officer">Username</span>
       </div>
     </header>
 
     <section class="stats">
       <div class="stat">
         <div class="stat-top">
-          <span class="ico">⏳</span>
+          <span class="ico"><i class="ti-ico ti-ico--hourglass"></i></span>
           <small>PENDING<br />REQUESTS</small>
           <span class="tag">-</span>
         </div>
@@ -42,7 +112,7 @@
       </div>
       <div class="stat">
         <div class="stat-top">
-          <span class="ico">💳</span>
+          <span class="ico"><i class="ti-ico ti-ico--check"></i></span>
           <small>APPROVED<br />TODAY</small>
           <span class="tag">-</span>
         </div>
@@ -53,7 +123,7 @@
       </div>
       <div class="stat">
         <div class="stat-top">
-          <span class="ico">👥</span>
+          <span class="ico"><i class="ti-ico ti-ico--id"></i></span>
           <small>REGISTERED<br />RESIDENTS</small>
           <span class="tag">-</span>
         </div>
@@ -64,7 +134,7 @@
       </div>
       <div class="stat">
         <div class="stat-top">
-          <span class="ico">⏱</span>
+          <span class="ico"><i class="ti-ico ti-ico--bolt"></i></span>
           <small>AVG PROCESSING<br />TIME</small>
           <span class="tag">-</span>
         </div>
@@ -82,7 +152,16 @@
             <h3>Monthly Request Volume &amp; Trends</h3>
             <small>Real-time barangay clearance and clearance filing trends</small>
           </div>
-          <span class="pill">Last 30 Days ▾</span>
+          <div class="status-dropdown" [class.open]="rangeOpen">
+            <button type="button" class="status-btn" (click)="toggleRange()">
+              {{ selectedRange }} <span class="chev">▾</span>
+            </button>
+            <ul class="status-list">
+              @for (r of rangeOptions; track r) {
+                <li (click)="selectRange(r)" [class.active]="r === selectedRange">{{ r }}</li>
+              }
+            </ul>
+          </div>
         </div>
         <div class="chart-box"><canvas #lineChart></canvas></div>
       </div>
@@ -105,7 +184,10 @@
       <div class="card-head">
         <h3>Recent Document Requests</h3>
         <div class="tools">
-          <input type="text" placeholder="🔍 Search by RRF or Name" />
+          <label class="search-box">
+            <i class="ti-ico ti-ico--zoom"></i>
+            <input type="text" placeholder="Search by RRF or Name" />
+          </label>
           <div class="status-dropdown" [class.open]="statusOpen">
             <button type="button" class="status-btn" (click)="toggleStatus()">
               {{ selectedStatus }} <span class="chev">▾</span>
@@ -116,7 +198,7 @@
               }
             </ul>
           </div>
-          <span class="pill tab">Export CSV</span>
+          <button type="button" class="export-btn" (click)="exportCsv()">⭳ Export CSV</button>
         </div>
       </div>
       <table>
@@ -124,7 +206,7 @@
           <tr><th>Ref ID</th><th>Resident Name</th><th>Document Type</th><th>Zone - Purok</th><th>Date Filed</th><th>Status</th><th>Actions</th></tr>
         </thead>
         <tbody>
-          <tr><td colspan="7" style="text-align:center;color:rgba(214,235,226,0.4);padding:20px;">No records yet</td></tr>
+          <tr><td colspan="7" style="text-align:center;color:rgba(31,36,48,0.4);padding:20px;">No records yet</td></tr>
         </tbody>
       </table>
       <div class="pager">

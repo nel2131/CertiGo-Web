@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AdminSession } from '../core/admin-session';
 
 @Component({
   selector: 'app-request',
@@ -11,6 +12,17 @@ export class Request implements AfterViewInit {
   activeFilter = 0;
   @ViewChild('filterGroup') filterGroup!: ElementRef<HTMLDivElement>;
 
+  readonly session = inject(AdminSession);
+
+  /** First + last initial, or a single letter when only one name is set. */
+  get initials(): string {
+    return this.session.initials();
+  }
+
+  sortOptions = ['Newest', 'Oldest', 'Resident Name', 'Document Type', 'Status'];
+  selectedSort = 'Newest';
+  sortOpen = false;
+
   ngAfterViewInit() {
     this.moveSlider();
   }
@@ -18,6 +30,15 @@ export class Request implements AfterViewInit {
   setFilter(index: number) {
     this.activeFilter = index;
     setTimeout(() => this.moveSlider());
+  }
+
+  toggleSort() {
+    this.sortOpen = !this.sortOpen;
+  }
+
+  selectSort(s: string) {
+    this.selectedSort = s;
+    this.sortOpen = false;
   }
 
   private moveSlider() {

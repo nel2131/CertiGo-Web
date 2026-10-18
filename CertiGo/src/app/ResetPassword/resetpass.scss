@@ -8,59 +8,60 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 28px 24px;
   box-sizing: border-box;
-  background:
-    radial-gradient(ellipse 80% 60% at 25% 0%, rgba(16, 122, 87, 0.55), transparent 60%),
-    radial-gradient(ellipse 70% 60% at 85% 100%, rgba(10, 74, 58, 0.6), transparent 60%),
-    linear-gradient(160deg, #0b3d33 0%, #062a23 45%, #041f1a 100%);
-  background-color: #062a23;
+  background-color: #f4f1fa;
+  background-image:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(216, 180, 254, 0.45), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(232, 121, 249, 0.28), transparent 62%);
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .forgot-wrap {
+  position: relative;
   width: 100%;
   max-width: 340px;
   text-align: center;
 }
 
 .key {
-  font-size: 2.6rem;
-  margin-bottom: 10px;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 8px 16px rgba(88, 28, 135, 0.35));
 }
 
 .brand {
   margin: 0;
-  color: #f2fbf7;
+  color: #1d2340;
   font-size: 1.15rem;
   font-weight: 700;
 }
 
 .subtitle {
-  margin: 6px 0 20px;
-  color: rgba(214, 235, 226, 0.6);
+  margin: 6px 0 22px;
+  color: rgba(29, 35, 64, 0.55);
   font-size: 0.66rem;
   letter-spacing: 0.04em;
 }
 
 .login-card {
-  padding: 20px;
+  padding: 20px 18px;
   box-sizing: border-box;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.09);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(168, 180, 194, 0.94), rgba(140, 153, 169, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 26px 54px rgba(60, 40, 100, 0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   text-align: left;
 }
 
 .code-label {
-  margin: 0 0 8px;
+  margin: 0 0 9px;
   text-align: center;
-  color: rgba(226, 242, 235, 0.85);
-  font-size: 0.6rem;
+  color: rgba(248, 250, 255, 0.9);
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.14em;
 }
@@ -69,23 +70,25 @@
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 
   input {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     text-align: center;
-    border-radius: 7px;
-    border: 1px solid rgba(52, 211, 153, 0.5);
-    background: rgba(255, 255, 255, 0.12);
-    color: #e6f4ee;
-    font-size: 0.9rem;
-    font-weight: 600;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: linear-gradient(160deg, #c026d3, #7e22ce);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
     outline: none;
+    box-shadow: 0 6px 16px rgba(126, 34, 206, 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
 
     &:focus {
-      border-color: #34d399;
-      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.25), 0 10px 22px rgba(126, 34, 206, 0.45);
     }
   }
 }
@@ -93,20 +96,25 @@
 .resend {
   margin: 0 0 16px;
   text-align: center;
-  color: rgba(214, 235, 226, 0.5);
+  color: rgba(248, 250, 255, 0.75);
   font-size: 0.55rem;
   letter-spacing: 0.06em;
 
   a {
-    color: #34d399;
+    color: #fbcfe8;
+    font-weight: 600;
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 label {
   display: block;
   margin: 0 0 5px;
-  color: rgba(226, 242, 235, 0.85);
+  color: rgba(248, 250, 255, 0.9);
   font-size: 0.56rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -124,24 +132,25 @@ label {
   transform: translateY(-50%);
   width: 14px;
   height: 14px;
-  color: #34d399;
+  color: #2a3152;
 }
 
 .field input {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 38px 10px 34px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(255, 255, 255, 0.12);
-  color: #e6f4ee;
+  padding: 11px 38px 11px 34px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(233, 238, 245, 0.85);
+  color: #1d2340;
   font-size: 0.78rem;
   outline: none;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 
   &:focus {
-    border-color: rgba(52, 211, 153, 0.5);
-    background: rgba(255, 255, 255, 0.16);
+    border-color: #c026d3;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(192, 38, 211, 0.18);
   }
 }
 
@@ -154,7 +163,7 @@ label {
   border: none;
   padding: 0;
   cursor: pointer;
-  color: rgba(214, 235, 226, 0.5);
+  color: rgba(29, 35, 64, 0.55);
 
   svg {
     width: 14px;
@@ -163,29 +172,80 @@ label {
   }
 
   &:hover {
-    color: #34d399;
+    color: #c026d3;
   }
 }
 
 .submit {
   width: 100%;
   margin-top: 4px;
-  padding: 11px 0;
+  padding: 12px 0;
   border: none;
-  border-radius: 9px;
-  background: linear-gradient(90deg, #34d399, #10b981);
-  color: #04302a;
-  font-size: 0.66rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #efe7ff 0%, #c084fc 45%, #a21caf 100%);
+  color: #ffffff;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   cursor: pointer;
-  transition: filter 0.2s, transform 0.15s;
+  box-shadow: 0 10px 24px rgba(162, 28, 175, 0.32);
+  transition: filter 0.2s, transform 0.15s, box-shadow 0.2s;
 
   &:hover {
-    filter: brightness(1.08);
+    filter: brightness(1.05);
+    box-shadow: 0 14px 30px rgba(162, 28, 175, 0.42);
   }
 
   &:active {
     transform: scale(0.98);
+  }
+}
+
+/* ---------------- Dark theme ---------------- */
+:host-context(.dark) {
+  .login-page {
+    background-color: #100e18;
+    background-image:
+      radial-gradient(ellipse 60% 45% at 50% 0%, rgba(124, 58, 237, 0.3), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 50% 100%, rgba(147, 51, 234, 0.22), transparent 62%);
+  }
+
+  .key { filter: drop-shadow(0 8px 18px rgba(124, 58, 237, 0.45)); }
+
+  .brand { color: #f5f3fc; }
+  .subtitle { color: rgba(236, 234, 245, 0.62); }
+
+  .login-card {
+    background: linear-gradient(180deg, rgba(45, 38, 64, 0.96), rgba(32, 27, 46, 0.96));
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 26px 54px rgba(0, 0, 0, 0.55);
+  }
+
+  .code-label,
+  label { color: rgba(236, 234, 245, 0.78); }
+
+  .code-row input {
+    background: linear-gradient(160deg, #7c3aed, #5b21b6);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .resend {
+    color: rgba(236, 234, 245, 0.7);
+    a { color: #e9d5ff; }
+  }
+
+  .field {
+    .icon { color: rgba(236, 234, 245, 0.6); }
+
+    input {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.14);
+      color: #eceaf5;
+    }
+
+    .eye {
+      color: rgba(236, 234, 245, 0.6);
+      &:hover { color: #c4b5fd; }
+    }
   }
 }

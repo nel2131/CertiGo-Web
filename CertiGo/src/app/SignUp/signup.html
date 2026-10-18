@@ -1,50 +1,72 @@
 <div class="login-page">
-  <div class="login-card">
-    <h1 class="brand">CertiGo.</h1>
-    <p class="title">Register Staff Account</p>
-    <p class="subtitle">Enter official credentials &amp; invitation token</p>
+  <section class="login-side">
+    <span class="deco deco-circle" aria-hidden="true"></span>
+    <span class="deco deco-block" aria-hidden="true"></span>
 
-    <form>
-      <label for="fullname">Staff Full Name</label>
-      <div class="field">
-        <input id="fullname" type="text" placeholder="Officer Maria Santos" />
-      </div>
+    <div class="login-card">
+      <h1 class="brand">Certi<span>Go.</span></h1>
+      <p class="title">Register Staff Account</p>
+      <p class="subtitle">Enter official credentials &amp; initiation token</p>
 
-      <label for="email">Official Email</label>
-      <div class="field">
-        <input id="email" type="email" placeholder="m.santos@barangay.gov.ph" />
-      </div>
+      <form>
+        <label for="fullname">Staff Full Name</label>
+        <div class="field">
+          <input id="fullname" type="text" placeholder="Officer Maria Santos" />
+        </div>
 
-      <label for="mobile">Mobile Number</label>
-      <div class="field">
-        <input id="mobile" type="tel" placeholder="+63 917 234 5678" />
-      </div>
+        <label for="email">Official Email</label>
+        <div class="field">
+          <input id="email" type="email" placeholder="m.santos@barangay.gov.ph" />
+        </div>
 
-      <label for="password">Password</label>
-      <div class="field">
-        <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="••••••••••••" />
-        <button type="button" class="eye" (click)="togglePassword()" aria-label="Toggle password visibility">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </button>
-      </div>
+        <label for="mobile">Mobile Number</label>
+        <div class="field">
+          <input id="mobile" type="tel" placeholder="+63 917 234 5678" />
+        </div>
 
-      <label for="confirm">Confirm Password</label>
-      <div class="field">
-        <input id="confirm" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="••••••••••••" />
-        <button type="button" class="eye" (click)="toggleConfirmPassword()" aria-label="Toggle confirm password visibility">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </button>
-      </div>
+        <label for="password">Password</label>
+        <div class="field">
+          <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="••••••••••••" />
+          <button type="button" class="eye" (click)="togglePassword()" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
 
-      <button type="submit" class="submit">CREATE ADMIN ACCOUNT</button>
-    </form>
+        <label for="confirm">Confirm Password</label>
+        <div class="field">
+          <input id="confirm" [type]="showConfirmPassword ? 'text' : 'password'" placeholder="••••••••••••" />
+          <button type="button" class="eye" (click)="toggleConfirmPassword()" aria-label="Toggle confirm password visibility">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
 
-    <p class="footer">Already registered? <a routerLink="/login">Return to Login</a></p>
-  </div>
+        <button type="submit" class="submit">CREATE ADMIN ACCOUNT</button>
+      </form>
+
+      <p class="footer">Already registered? <a routerLink="/login">Return to Log In</a></p>
+    </div>
+  </section>
+
+  <aside class="panel">
+    <svg class="panel-weave" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <pattern id="weave-signup" width="44" height="26" patternUnits="userSpaceOnUse">
+          <path d="M0 26 L11 13 L22 26 L33 13 L44 26" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="3" />
+          <path d="M0 0 L11 13 L22 0 L33 13 L44 0" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" />
+        </pattern>
+      </defs>
+      <rect width="400" height="400" fill="url(#weave-signup)" />
+    </svg>
+
+    <div class="panel-copy">
+      <h2>&ldquo;Empowerment for every barangay, convenience for every resident.&rdquo;</h2>
+      <span class="panel-tag">CertiGo &bull; Barangay Governance System</span>
+    </div>
+  </aside>
 </div>
